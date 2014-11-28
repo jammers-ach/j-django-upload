@@ -6,7 +6,10 @@ Because I want to be able to say
 
 ``files = MultipleFileField(upload_view=’order_upload’)``
 
+
 in my model and have a nice ajaxy field with multiple drag and drop of files, with icons that represent their mimetypes and previews of image files.
+
+And, most importantly, puts it in a directory based on that model, 
 
 # hasn’t someone done this already?
 
