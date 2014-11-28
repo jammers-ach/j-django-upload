@@ -24,6 +24,21 @@ function make_icon(jsonData,fname){
     return text
 }
 
+var delete_stack = []
+
+function delete_file(opt){
+    console.log(opt);
+    var input = opt.parent().parent().find('input[type=hidden]');
+    console.log(input);
+    var object = opt.find('a').attr('href').replace('/media/','');
+    var txt = input.val();
+    var new_text = txt.replace(object,'');
+    console.log(txt,object,new_text);
+    input.val(new_text);
+    opt.hide();
+    delete_stack.push(opt);
+}
+
 $(function(){
     var csrftoken = getCookie('csrftoken');
 
@@ -54,5 +69,14 @@ $(function(){
               'csrf_xname': 'X-CSRFToken',
             },
         });
-    })
+    });
+
+    $(".file").contextMenu('file_context_menu', {
+        'Delete': {
+            click: function(element){  // element is the jquery obj clicked on when context menu launched
+                delete_file(element);
+            },
+        },
+    } );
+
 });

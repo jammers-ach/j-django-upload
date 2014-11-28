@@ -42,8 +42,13 @@ class MultipleFileWidget(widgets.Input):
 
     class Media:
         css = {
-            'all': ('jdjango_upload/css/jdjango_upload.css','jdjango_upload/css/mimetypes.css','ajaxuploader/css/fileuploader.css')
+            'all': ('jdjango_upload/css/jdjango_upload.css',
+                    'jdjango_upload/css/mimetypes.css',
+                    'jdjango_upload/css/fileuploader.css',
+                    'jdjango_upload/css/jquery.contextMenu.css')
         }
         js = ('jdjango_upload/js/uploader.js',
-              'ajaxuploader/js/fileuploader.js',) #TODO find out how to reference jquery properly)
+              'jdjango_upload/js/fileuploader.js',
+              'jdjango_upload/js/jquery.contextMenu.js',
+              ) #TODO find out how to reference jquery properly)
 

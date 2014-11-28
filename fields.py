@@ -67,14 +67,19 @@ def move_files(obj,field,new_dir):
                 words[1] = new_dir
                 new_path = '/'.join(words)
 
-                os.rename(i,new_path)
+                if(os.path.exists(i)):
+                    #we should have the new path here
+                    os.rename(i,new_path)
+                elif(not os.path.exists(new_path)):
+                    raise IOError("Couldn't find old path or new path %s %s" % (i,new_path))
 
                 modified = True
                 i = new_path
             new_files.append(i)
 
 
-    setattr(obj,field,','.join(new_files))
-
     if(modified):
+        print 'modified',new_files
+        setattr(obj,field,','.join(new_files))
         obj.save()
+        print obj.files
