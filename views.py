@@ -4,8 +4,7 @@ from ajaxuploader.signals import file_uploaded
 from ajaxuploader.backends.local import LocalUploadBackend
 from django.conf import settings
 import os
-import magic
-
+from mimes import get_mime
 # Create your views here.
 
 class JUploaderbackend(LocalUploadBackend):
@@ -28,7 +27,7 @@ class JUploaderbackend(LocalUploadBackend):
     def upload_complete(self,request,filename):
         '''resizes the image and converts to PNG'''
         fpath = os.path.join(self.UPLOAD_DIR,filename)
-        mimetype = magic.from_file(fpath,mime=True).replace('/','-')
+        mimetype = get_mime(fpath)
 
         return {'mimetype':mimetype,
                 'path':fpath,}

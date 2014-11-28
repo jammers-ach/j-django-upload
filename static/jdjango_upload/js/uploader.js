@@ -17,7 +17,7 @@ function getCookie(name) {
 
 function make_icon(jsonData,fname){
     text ="<div class='file'>"
-    text += '<div class="ficon "'+jsonData['mimetype'] +'"/>'
+    text += '<div class="ficon '+jsonData['mimetype'] +'"/>'
     text += '<span>' +fname+ '</span>'
     text += '<a target="_blank" href="/media/'+jsonData['path']+ '"/><span></span></a></span>'
     text += '</div>'
