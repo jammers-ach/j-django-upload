@@ -82,4 +82,27 @@ def move_files(obj,field,new_dir):
         print 'modified',new_files
         setattr(obj,field,','.join(new_files))
         obj.save()
-        print obj.files
+
+
+
+fnames = lambda a: [os.path.split(i)[-1] for i in a if i != '']
+
+def new_files(original,new):
+    '''given an original set of files and a new set of files
+    returns [new_files,deleted_files]'''
+    if(original== None and new != None):
+        return fnames(new),[]
+    elif(original== None and new == None):
+        return [],[]
+    elif(original != None and new == None):
+        return [],fnames(original)
+
+    files1 = set(original.split(','))
+    files2 = set(new.split(','))
+
+
+    new = fnames(files2.difference(files1))
+    deleted = fnames(files1.difference(files2))
+
+
+    return new,deleted

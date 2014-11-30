@@ -37,6 +37,7 @@ function delete_file(opt){
     input.val(new_text);
     opt.hide();
     delete_stack.push(opt);
+    input.trigger('change');
 }
 
 $(function(){
@@ -63,6 +64,7 @@ $(function(){
 
                 our_input.val( our_input.val() + ',' + responseJSON['path']);
                 our_filepath.append(make_icon(responseJSON,filename));
+                our_input.trigger('change');
             },params: {
               'csrf_token':csrftoken,
               'csrf_name': 'csrfmiddlewaretoken',
