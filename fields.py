@@ -35,6 +35,7 @@ class MultipleFileField(Field):
 
 
 unsorted_dir = getattr(settings, "DEFAULT_JUPLOAD_DIR", "unsorted_files")
+media_root = getattr(settings, "MEDIA_ROOT", "media")
 
 def move_files(obj,field,new_dir):
     '''I would like to do this:
@@ -51,7 +52,9 @@ def move_files(obj,field,new_dir):
 
     files = getattr(obj,field)
 
-    test_dir = os.path.join('uploads',new_dir)
+
+
+    test_dir = os.path.join(media_root,'uploads',new_dir)
     if not os.path.exists(test_dir):
         os.makedirs(test_dir)
 
@@ -67,10 +70,14 @@ def move_files(obj,field,new_dir):
                 words[1] = new_dir
                 new_path = '/'.join(words)
 
-                if(os.path.exists(i)):
+                old_path = os.path.join(media_root,i)
+                new_path2 = os.path.join(media_root,new_path)
+
+
+                if(os.path.exists(old_path)):
                     #we should have the new path here
-                    os.rename(i,new_path)
-                elif(not os.path.exists(new_path)):
+                    os.rename(old_path,new_path2)
+                elif(not os.path.exists(new_path2)):
                     raise IOError("Couldn't find old path or new path %s %s" % (i,new_path))
 
                 modified = True
